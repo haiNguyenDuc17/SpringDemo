@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @RestController
@@ -24,6 +25,8 @@ public class DemoController {
   private String setting;
   @Value("${demo_secret:}")
   private String secret;
+  @Value("${api_test:}")
+  private String apiTest;
 
   @GetMapping("/hello")
   @ResponseBody
@@ -46,11 +49,11 @@ public class DemoController {
     return "secret: " + secret;
   }
 
-  @GetMapping("/call-express")
+  @GetMapping("/call")
   @ResponseBody
   public String callExpress() {
-    //call api GET http://localhost:3000/hello
-
-    return "secret: " + secret;
+    log.info("call express: {}", apiTest);
+    RestTemplate template = new RestTemplate();
+    return template.getForObject(apiTest, String.class);
   }
 }
