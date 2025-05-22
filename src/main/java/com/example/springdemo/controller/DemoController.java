@@ -52,8 +52,13 @@ public class DemoController {
   @GetMapping("/call")
   @ResponseBody
   public String callExpress() {
-    log.info("call express: {}", apiTest);
-    RestTemplate template = new RestTemplate();
-    return template.getForObject(apiTest, String.class);
+    try{
+      log.info("call express: {}", apiTest);
+      RestTemplate template = new RestTemplate();
+      return template.getForObject(apiTest, String.class);
+    }catch (Exception e){
+      return e.getMessage();
+    }
+
   }
 }
