@@ -2,8 +2,11 @@
 
 
 mvn clean package
-docker build -t acr.azurecr.io/springdemo:latest .
+docker build -t pma4acr.azurecr.io/springdemo:latest .
 az account set --subscription BD-XDV-Learning-Sandbox
-az acr login --name acr
-docker login acr.azurecr.io
-docker push acr.azurecr.io/springdemo:latest
+az acr login --name pma4acr
+docker login pma4acr.azurecr.io
+docker push pma4acr.azurecr.io/springdemo:latest
+az acr repository list --name pma4acr --output table
+
+az aks get-credentials --resource-group pma4hc --name pma4aks
