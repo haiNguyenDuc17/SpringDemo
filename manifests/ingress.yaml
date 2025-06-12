@@ -13,6 +13,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: springdemo
+                name: springdemo-service
                 port:
                   number: 80

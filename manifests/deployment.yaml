@@ -24,7 +24,7 @@ metadata:
   name: springdemo-service
 spec:
   selector:
-    app: springdemo
+    app: springdemo-service
   ports:
   - protocol: TCP
     port: 80
