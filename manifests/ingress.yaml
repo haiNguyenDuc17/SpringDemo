@@ -2,9 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: springdemo-ingress
-  spec:
-    ingressClassName: azure/application-gateway
 spec:
+  ingressClassName: azure-application-gateway
   rules:
     - http:
         paths:
