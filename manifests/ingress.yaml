@@ -7,10 +7,10 @@ spec:
   rules:
     - http:
         paths:
-          - path: /
-            backend:
-              service:
-                name: springdemo-service
-                port:
-                  number: 80
-            pathType: Exact
+        - path: /
+          backend:
+            service:
+              name: springdemo-service
+              port:
+                number: 80
+          pathType: Exact
