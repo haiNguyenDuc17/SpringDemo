@@ -10,7 +10,7 @@ spec:
       - path: /
         backend:
           service:
-            name: springdemo-service
+            name: springdemo
             port:
               number: 80
         pathType: Exact
