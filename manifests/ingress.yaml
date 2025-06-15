@@ -12,5 +12,5 @@ spec:
           service:
             name: springdemo
             port:
-              number: 8080
-        pathType: Exact
+              number: 80
+        pathType: Prefix
