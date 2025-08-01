@@ -10,3 +10,9 @@ docker push pma4acr.azurecr.io/springdemo:latest
 az acr repository list --name pma4acr --output table
 
 az aks get-credentials --resource-group pma4hc --name pma4aks
+
+
+
+#Enable SQL profile
+Set SPRING_PROFILES_ACTIVE=sql
+set connection_string=${your connection string}
