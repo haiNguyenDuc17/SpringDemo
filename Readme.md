@@ -1,32 +1,57 @@
-#this is a Spring boot application for demo
-APIs in the repo with default profile: 
-/demo/hello?name=${text}        sleep 10s then return Hello ${text}!
-/demo/setting                   return value of property demo_setting
-/demo/secret                    return value of property demo_secret
-/demo/call                      call external api method get with full endpoint is value of property api_test
+# Spring Boot Application Demo
+
+This repository contains a Spring Boot application with the following APIs and features.
+
+---
+
+## APIs (Default Profile)
+
+- **GET** `/demo/hello?name=${text}`
+  Sleeps for 10 seconds, then returns: `Hello ${text}!`
+
+- **GET** `/demo/setting`
+  Returns the value of the property `demo_setting`.
+
+- **GET** `/demo/secret`
+  Returns the value of the property `demo_secret`.
+
+- **GET** `/demo/call`
+  Calls an external API using the `GET` method. The full endpoint is the value of the property `api_test`.
+
+---
+
+## Enable SQL Profile ("sql")
+
+To enable Azure SQL features, set the following environment variables:
+```bash
+SPRING_PROFILES_ACTIVE=sql
+connection_string=${your connection string}
+```
+
+- **GET** `/sql/check`
+  return success if profile "sql" was enabled successful
+
+- **GET** `/sql/insert`
+  insert a record to integrated Azure SQL database - todo table
+
+- **GET** `/sql/get`
+  get all records in todo table
 
 
-#Enable SQL profile
-To enable Azure SQL features on this repo, you should set following environment variables: 
-    SPRING_PROFILES_ACTIVE=sql
-    connection_string=${your connection string}
-
-Then the api will be enabled for using Azure SQL as the database. 
-GET - /sql/check                return success if profile "sql" was enabled successful
-GET - /sql/insert               insert a record to integrated Azure SQL database - todo table
-GET - /sql/get                  get all records in todo table
-
-
-#Enable Key Vault profile
+## Enable Key Vault Profile ("keyvault")
 if the profile is enabled, you can add environment variables to your app service to integrate with this app:
-    DEMO_SECRET=@Microsoft.KeyVault(SecretUri=https://${your-keyvault-name}.vault.azure.net/secrets/demo-secret/)
-    value of property demo_secret will be retrieved from Azure Key Vault and return to api /keyvault/secret
+DEMO_SECRET=@Microsoft.KeyVault(SecretUri=https://${your-keyvault-name}.vault.azure.net/secrets/demo-secret/)
+value of property demo_secret will be retrieved from Azure Key Vault and return to api /keyvault/secret
+```bash
+SPRING_PROFILES_ACTIVE=sql,keyvault
+DEMO_SECRET=${your keyvault secret link as above template}
+```
 
-GET - /keyvault/secret                  return value of DEMO_SECRET
+- **GET** `/keyvault/secret`
+  return value of DEMO_SECRET, if we integrated the app with Azure Key vault successfully, it will return value of the Key vault secret
 
 
-
-#Steps to build docker image and push it to ACR
+## Steps to build docker image and push it to ACR
 mvn clean package
 docker build -t pma4acr.azurecr.io/springdemo:latest .
 az account set --subscription BD-XDV-Learning-Sandbox
